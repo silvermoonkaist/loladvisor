@@ -81,6 +81,7 @@
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:text="TOP"
+                android:singleLine="true"
                 android:textSize="18dp"
                 android:textColor="#000000" />
             <Spinner
@@ -112,6 +113,7 @@
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:text="JUNGLE"
+                android:singleLine="true"
                 android:textSize="18dp"
                 android:textColor="#000000" />
             <Spinner
@@ -144,6 +146,7 @@
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:text="MID"
+                android:singleLine="true"
                 android:textSize="18dp"
                 android:textColor="#000000" />
             <Spinner
@@ -174,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
+                android:singleLine="true"
                 android:text="AD"
                 android:textSize="18dp"
                 android:textColor="#000000" />
@@ -210,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
+                android:singleLine="true"
                 android:text="SUPPORT"
                 android:textSize="18dp"
                 android:textColor="#000000" />
