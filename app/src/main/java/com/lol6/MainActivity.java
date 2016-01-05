@@ -25,7 +25,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> arraylist;
-    ArrayList<String> champion;
+    static ArrayList<String> champion;
     ArrayList<String> champion_number;
     Spinner sp;
     Spinner sp_1;
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
     String text_9 = "SELECT";
     String text_10 = "SELECT";
 
-     Integer images[] = {R.drawable.oh,R.drawable.aatrox,
-    R.drawable.ahri,R.drawable.akali,R.drawable.alistar,
-    R.drawable.amumu,R.drawable.anivia,R.drawable.annie,
-    R.drawable.ashe,R.drawable.azir,R.drawable.bard,
+     static Integer images[] = {R.drawable.oh,R.drawable.aatrox,
+        R.drawable.ahri,R.drawable.akali,R.drawable.alistar,
+        R.drawable.amumu,R.drawable.anivia,R.drawable.annie,
+        R.drawable.ashe,R.drawable.azir,R.drawable.bard,
             R.drawable.blitzcrank,R.drawable.brand,R.drawable.braum
             ,R.drawable.caitlyn,R.drawable.cassiopeia,R.drawable.chogath
              ,R.drawable.corki,R.drawable.darius,R.drawable.diana
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("LoL Advisor v1.0");
 
         Button button1=(Button)findViewById(R.id.button);
         button1.setOnClickListener(new View.OnClickListener() {

@@ -8,20 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Frag_1 extends Fragment {
+public class Frag_3 extends Fragment {
     public ListView lv;
-    public static MySimpleArrayAdapter adapter1;
+    public static MySimpleArrayAdapter adapter3;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_frag, container, false);
         lv = (ListView) rootView.findViewById(R.id.listView);
 
 
-        adapter1 = new MySimpleArrayAdapter(getContext(), LVMonitor.mostPick);
-        lv.setAdapter(adapter1);
+        adapter3 = new MySimpleArrayAdapter(getContext(), LVMonitor.mostLose);
+        lv.setAdapter(adapter3);
         //adapter1.notifyDataSetChanged();
 
         return rootView;
     }
 }
-

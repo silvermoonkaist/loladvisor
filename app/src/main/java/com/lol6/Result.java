@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,14 +47,14 @@ public class Result extends AppCompatActivity {
     String receieve_data = "";
 
 
-    TextView textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        Log.d("Test", "oncreate");
-        textview = (TextView) findViewById(R.id.testbox);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Search Result");
 
 
 
@@ -70,61 +73,19 @@ public class Result extends AppCompatActivity {
         send_data = "a1=" + text_1 + "&a2=" + text_2 + "&a3=" + text_3 + "&a4=" + text_4 + "&a5=" + text_5 + "&b1=" + text_6 + "&b2=" + text_7 + "&b3=" + text_8 + "&b4=" + text_9 + "&b5=" + text_10 + "&pos=" + text_0;
         //send_data = "a3=7&a5=432&pos=4";
 
+        LVMonitor.mostPick.clear();
+        LVMonitor.mostWin.clear();
+        LVMonitor.mostLose.clear();
         HttpTask httpTask = new HttpTask();
         httpTask.execute();
         receieve_data = httpTask.data;
-        Toast.makeText(getApplicationContext(), receieve_data, Toast.LENGTH_LONG).show();
-
-        /*
-        try {
-            receieve_data = doGetRequest("http://143.248.36.230?"+send_data);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }
-        Log.d("FUCK", receieve_data);
-        Toast.makeText(getApplicationContext(), receieve_data, Toast.LENGTH_LONG).show();
-
-        */
-        //tv.setText(receieve_data);
-
-
-
-
-
-        //      NetworkTask net = new NetworkTask();
-    //    net.execute("http://143.248.36.230/?" + send_data);
-
-        //Toast.makeText(Result.this, recieve_data, Toast.LENGTH_LONG).show();
-
-
-
-        // Toast.makeText(Result.this, recieve_data, Toast.LENGTH_SHORT).show();
-
-
-       /* Toast.makeText(Result.this, text_0, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_1, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_2, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_3, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_4, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_5, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_6, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_7, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_8, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_9, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Result.this, text_10, Toast.LENGTH_SHORT).show();    */
-
-
-
-        //String wow = "" + text_0 + text_1 + text_2 + text_3 + text_4 + text_5 + text_6 + text_7 + text_8 + text_9 + text_10;
-
-
-
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Most freq"));
-        tabLayout.addTab(tabLayout.newTab().setText("Most win"));
+        tabLayout.addTab(tabLayout.newTab().setText("Freq"));
+        tabLayout.addTab(tabLayout.newTab().setText("Win"));;
+        tabLayout.addTab(tabLayout.newTab().setText("Lose"));
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -164,7 +125,9 @@ public class Result extends AppCompatActivity {
 
         protected void onPreExecute() {
             try {
-                url = new URL("http://143.248.36.230?"+send_data);
+                //url = new URL("http://143.248.36.230?"+send_data);
+                url = new URL("http://52.34.174.33:3000?"+send_data);
+
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -194,6 +157,31 @@ public class Result extends AppCompatActivity {
                 }
 
                 JSONObject json = new JSONObject(builder.toString());
+                LVMonitor.t.clear();
+                LVMonitor.mostPick.clear();
+                LVMonitor.mostWin.clear();
+                LVMonitor.mostLose.clear();
+                for(int i = 0; i < 10; i++){
+                    JSONObject dm = json.getJSONObject("dm" + i);
+
+                    if(dm != null)
+                        LVMonitor.mostPick.add(new Champion(
+                                dm.getString("name"),
+                                dm.getDouble("rate"),
+                                dm.getInt("count")));
+                    JSONObject dw = json.getJSONObject("dw" + i);
+                    if(dw != null)
+                        LVMonitor.mostWin.add(new Champion(
+                                dw.getString("name"),
+                                dw.getDouble("rate"),
+                                dw.getInt("count")));
+                    JSONObject dl = json.getJSONObject("dl" + i);
+                    if(dl != null)
+                        LVMonitor.mostLose.add(new Champion(
+                                dl.getString("name"),
+                                dl.getDouble("rate"),
+                                dl.getInt("count")));
+                }
 
                 receieve_data = json.toString();
             } catch (IOException e) {
@@ -205,8 +193,15 @@ public class Result extends AppCompatActivity {
         }
 
         protected void onPostExecute(Void result) {
-            textview.setText(receieve_data);
+            if(Frag_1.adapter1 != null)
+                Frag_1.adapter1.notifyDataSetChanged();
+            if(Frag_2.adapter2 != null)
+                Frag_2.adapter2.notifyDataSetChanged();
+            if(Frag_3.adapter3 != null)
+                Frag_3.adapter3.notifyDataSetChanged();
+
             super.onPostExecute(result);
+
         }
     }
 }
