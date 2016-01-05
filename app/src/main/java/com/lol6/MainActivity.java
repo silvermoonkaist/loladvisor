@@ -178,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
         }
         /*CustomAdapter adapter_1 = new CustomAdapter(MainActivity.this,
                 R.layout.spinner_item, champion, images);*/
+        CustomAdapter adapter_1 = new CustomAdapter(MainActivity.this,
+                R.layout.spinner_item, champion);
         //스피너 속성
         sp_1 = (Spinner) this.findViewById(R.id.spinner_1);
         sp_2 = (Spinner) this.findViewById(R.id.spinner_2);
@@ -189,27 +191,16 @@ public class MainActivity extends AppCompatActivity {
         sp_8 = (Spinner) this.findViewById(R.id.spinner_8);
         sp_9 = (Spinner) this.findViewById(R.id.spinner_9);
         sp_10 = (Spinner) this.findViewById(R.id.spinner_10);
-        sp_1.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_2.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_3.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_4.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_5.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_6.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_7.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_8.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_9.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-        sp_10.setAdapter(new CustomAdapter(MainActivity.this,
-                R.layout.spinner_item, champion));
-
+        sp_1.setAdapter(adapter_1);
+        sp_2.setAdapter(adapter_1);
+        sp_3.setAdapter(adapter_1);
+        sp_4.setAdapter(adapter_1);
+        sp_5.setAdapter(adapter_1);
+        sp_6.setAdapter(adapter_1);
+        sp_7.setAdapter(adapter_1);
+        sp_8.setAdapter(adapter_1);
+        sp_9.setAdapter(adapter_1);
+        sp_10.setAdapter(adapter_1);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, arraylist);
